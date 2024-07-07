@@ -4,10 +4,12 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.mere.travail.job.Job;
 import com.mere.travail.job.JobRepository;
 import com.mere.travail.job.JobService;
+
 
 @Service
 public class JobServiceImplementation implements JobService {
@@ -44,7 +46,7 @@ public class JobServiceImplementation implements JobService {
             return false;
         }
     }
-
+    // @Transactional
     @Override
     public boolean updateJob(Long jobId, Job updateJob) {
         Optional<Job> jobOptional = jobRepository.findById(jobId);
@@ -55,7 +57,7 @@ public class JobServiceImplementation implements JobService {
             job.setMinSalary(updateJob.getMinSalary());
             job.setMaxSalary(updateJob.getMaxSalary());
             job.setLocation(updateJob.getLocation());
-            
+            jobRepository.save(job);
             return true; 
         }
     return false;
