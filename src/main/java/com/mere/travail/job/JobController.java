@@ -27,8 +27,8 @@ public class JobController {
      * @return
      */
     @GetMapping
-    public ResponseEntity<List<Job>> findAll() {
-        return ResponseEntity.ok(jobService.findAll());
+    public ResponseEntity<List<Job>> getAllJobs() {
+        return ResponseEntity.ok(jobService.getAllJobs());
     }
 
     /**
