@@ -1,9 +1,12 @@
 package com.mere.travail.company;
 
+import java.util.List;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mere.travail.job.Job;
+import com.mere.travail.review.Review;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -22,6 +25,17 @@ public class Company {
     @JsonIgnore
     @OneToMany(mappedBy = "company")
     private java.util.List<Job> jobs;
+
+    @OneToMany(mappedBy = "company")
+    private List<Review> reviews;
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
+    }
 
     public Company() {
     }
