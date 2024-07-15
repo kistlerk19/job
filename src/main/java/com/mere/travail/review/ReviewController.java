@@ -27,8 +27,15 @@ public class ReviewController {
 
     @PostMapping("/reviews")
     public ResponseEntity<String> addReview(@PathVariable Long companyId, @RequestBody Review review) {
-        reviewService.addReview(companyId, review);
+        boolean isReviewCreated = reviewService.addReview(companyId, review);
+        if (!isReviewCreated)
+            return new ResponseEntity<>("Unable to create a review.", HttpStatus.NOT_FOUND);
         return new ResponseEntity<>("Added a new review.", HttpStatus.OK);
+    }
+
+    @GetMapping("/reviews/{reviewId}")
+    public ResponseEntity<Review> getReview(@PathVariable Long companyId, @PathVariable Long reviewId) {
+        return new ResponseEntity<>(reviewService.getReview(companyId, reviewId), HttpStatus.OK);
     }
 
 }
